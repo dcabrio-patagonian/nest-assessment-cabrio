@@ -1,26 +1,18 @@
-import { ICustomWorld } from './custom-world';
-import { config } from './config';
 import { Before, After, BeforeAll, AfterAll, Status, setDefaultTimeout } from '@cucumber/cucumber';
-import {
-  chromium,
-  ChromiumBrowser,
-  firefox,
-  FirefoxBrowser,
-  webkit,
-  WebKitBrowser,
-} from 'playwright';
+import { chromium, ChromiumBrowser, firefox, FirefoxBrowser, webkit, WebKitBrowser } from 'playwright';
 import { ITestCaseHookParameter } from '@cucumber/cucumber/lib/support_code_library_builder/types';
 import { ensureDir } from 'fs-extra';
+import { ICustomWorld } from './custom-world';
+import { config } from './config';
 
 let browser: ChromiumBrowser | FirefoxBrowser | WebKitBrowser;
 const tracesDir = 'traces';
 
 declare global {
-  // eslint-disable-next-line no-var
-  var browser: ChromiumBrowser | FirefoxBrowser | WebKitBrowser;
+  let browser: ChromiumBrowser | FirefoxBrowser | WebKitBrowser;
 }
 
-setDefaultTimeout(process.env.PWDEBUG ? -1 : 60 * 1000);
+setDefaultTimeout(process.env.PWDEBUG ? -1 : parseInt(process.env.DEFAULT_TIMEOUT || '60000'));
 
 BeforeAll(async function () {
   switch (process.env.BROWSER) {
