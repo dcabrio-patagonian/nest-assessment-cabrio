@@ -1,7 +1,7 @@
 {
-  "name": "cucumber-playwright",
-  "version": "1.2.0",
-  "description": "Starter project to write and debug cucumber-js features with Playwright",
+  "name": "nest-assessment-cabrio",
+  "version": "0.0.1",
+  "description": "Assessment exam for the QA Nest program at Patagonian - 2022",
   "main": "index.js",
   "scripts": {
     "api": "DEBUG=pw:api cucumber-js",
@@ -26,14 +26,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tallyb/cucumber7-playwright.git"
+    "url": "git+https://github.com/dcabrio-patagonian/nest-assessment-cabrio.git"
   },
-  "author": "Tally Barak",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tallyb/cucumber-playwright/issues"
-  },
-  "homepage": "https://github.com/tallyb/cucumber-playwright#readme",
+  "author": "Damián Cabrio",
+  "license": "MIT",
+  "homepage": "https://github.com/dcabrio-patagonian/nest-assessment-cabrio#readme",
   "dependencies": {
     "@cucumber/cucumber": "7.3.2",
     "@cucumber/html-formatter": "18.0.0",
