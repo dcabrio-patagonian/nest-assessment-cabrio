@@ -9,11 +9,7 @@ export async function getElementsCount(page: Page, selector: string): Promise<nu
   return await page.$$eval(selector, (els) => els.length);
 }
 
-export async function waitForNthElement(
-  page: Page,
-  selector: string,
-  index: number,
-): Promise<void> {
+export async function waitForNthElement(page: Page, selector: string, index: number): Promise<void> {
   await page.waitForSelector(`${selector}:nth-of-type(${index})`);
 }
 
@@ -41,20 +37,13 @@ export async function getBoundingBox(
   return box;
 }
 
-export async function getCenterPoint(
-  page: Page,
-  selector: string,
-): Promise<{ x: number; y: number } | undefined> {
+export async function getCenterPoint(page: Page, selector: string): Promise<{ x: number; y: number } | undefined> {
   const box = await getBoundingBox(page, selector);
   if (!box) return;
   return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
 }
 
-export async function getStyleValue(
-  page: Page,
-  selector: string,
-  key: string,
-): Promise<string | undefined | null> {
+export async function getStyleValue(page: Page, selector: string, key: string): Promise<string | undefined | null> {
   await page.waitForSelector(selector);
   const styleAttribute = await page.getAttribute(selector, 'style');
   if (!styleAttribute) return;
@@ -65,4 +54,18 @@ export async function getStyleValue(
 
 export async function getTexts(page: Page, selector: string): Promise<Array<string | null>> {
   return await page.$$eval(selector, (els) => els.map((e) => e.textContent));
+}
+
+export function verifyPageObj(page: Page | undefined) {
+  if (!page) {
+    throw new Error('Page is not defined');
+  }
+  return page;
+}
+
+export async function goToUrl(page: Page, url: string, waitForElementSelector?: string) {
+  await page.goto(url);
+  if (waitForElementSelector) {
+    await page.locator(waitForElementSelector);
+  }
 }
