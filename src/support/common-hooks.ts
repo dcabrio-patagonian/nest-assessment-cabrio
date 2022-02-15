@@ -16,14 +16,14 @@ setDefaultTimeout(process.env.PWDEBUG ? -1 : parseInt(process.env.DEFAULT_TIMEOU
 
 BeforeAll(async function () {
   switch (process.env.BROWSER) {
-    case 'firefox':
-      browser = await firefox.launch(config.browserOptions);
+    case 'chromium':
+      browser = await chromium.launch(config.browserOptions);
       break;
     case 'webkit':
       browser = await webkit.launch(config.browserOptions);
       break;
     default:
-      browser = await chromium.launch(config.browserOptions);
+      browser = await firefox.launch(config.browserOptions);
   }
   await ensureDir(tracesDir);
 });
