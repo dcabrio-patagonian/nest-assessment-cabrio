@@ -64,7 +64,7 @@ export function verifyPageObj(page: Page | undefined) {
 }
 
 export async function goToUrl(page: Page, url: string, waitForElementSelector?: string) {
-  await page.goto(url);
+  await page.goto(url, { waitUntil: 'networkidle' });
   if (waitForElementSelector) {
     await page.locator(waitForElementSelector);
   }
