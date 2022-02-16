@@ -7,3 +7,17 @@ export async function checkCourseSearch(page: Page, titleSelector: string, expec
   const courses = await page.locator('.popper--popper--2r2To');
   expect(await courses.count()).toBeGreaterThan(0);
 }
+
+export async function checkPriceFilter(page: Page, expectedPrice: string) {
+  const price = await page.locator('div.price-text--price-part--2npPm.udlite-clp-discount-price').first().innerText();
+  if (expectedPrice === 'Free') {
+    expect(price).toContain(expectedPrice);
+  } else {
+    expect(price === 'Free').toBeFalsy();
+  }
+}
+
+export async function checkLanguageFilter(page: Page, expectedLanguage: string) {
+  const language = await page.locator("div[data-purpose='lead-course-locale']").first().innerText();
+  expect(language).toEqual(expectedLanguage);
+}
