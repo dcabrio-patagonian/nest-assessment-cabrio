@@ -11,6 +11,6 @@ Feature: Filter courses search
     Scenario: Filter couses search UI
         When I filter by "English" in the "Language" submenu
         And I filter by "Free" in the "Price" submenu
-        When I click the course at position "1"
+        And I click the course at position "1"
         Then I should see the filters filters applied
 
