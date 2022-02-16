@@ -45,6 +45,7 @@ Before(async function (this: ICustomWorld, { pickle }: ITestCaseHookParameter) {
     acceptDownloads: true,
     recordVideo: process.env.PWVIDEO ? { dir: 'screenshots' } : undefined,
   });
+  this.parameters.filters = [];
 
   await this.context.tracing.start({ screenshots: true, snapshots: true });
   this.page = await this.context.newPage();

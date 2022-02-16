@@ -12,7 +12,8 @@ export interface ICustomWorld extends World {
   context?: BrowserContext;
   page?: Page;
   testName?: string;
-  parameters: CucumberWorldConstructorParams;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  parameters: { [key: string]: any };
 }
 
 export class CustomWorld extends World implements ICustomWorld {
