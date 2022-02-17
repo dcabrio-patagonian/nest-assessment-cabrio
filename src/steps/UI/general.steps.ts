@@ -11,9 +11,14 @@ Given('I go to the main page', async function (this: ICustomWorld) {
   await goToUrl(page, process.env.BASE_URL || 'https://www.udemy.com/', "a[data-purpose='header-login']");
 });
 
-Given('I click on on the button with the selector {string}', async function (this: ICustomWorld, selector: string) {
+Given('I click the login button', async function () {
   const page = await verifyPageObj(this.page);
-  await page.locator(selector).click();
+  await page.click("a[data-purpose='header-login']");
+});
+
+Given('I click the submit button', async function () {
+  const page = await verifyPageObj(this.page);
+  await page.click("input[type='submit']");
 });
 
 Given('I am on the login page', async function (this: ICustomWorld) {
