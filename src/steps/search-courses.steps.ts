@@ -1,7 +1,7 @@
 import { Then, When } from '@cucumber/cucumber';
-import { ICustomWorld } from '../../support/custom-world';
-import { checkCourseSearch } from '../../utils/courses';
-import { verifyPageObj } from '../../utils/elements';
+import { ICustomWorld } from '../support/custom-world';
+import { checkCourseSearch } from '../utils/courses';
+import { verifyPageObj } from '../utils/elements';
 
 When('I search for courses with the category {string}', async function (this: ICustomWorld, category: string) {
   const page = verifyPageObj(this.page);

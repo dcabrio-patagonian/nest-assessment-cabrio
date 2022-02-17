@@ -1,7 +1,7 @@
 import { Then, When } from '@cucumber/cucumber';
-import { ICustomWorld } from '../../support/custom-world';
-import { checkLanguageFilter, checkPriceFilter } from '../../utils/courses';
-import { verifyPageObj } from '../../utils/elements';
+import { ICustomWorld } from '../support/custom-world';
+import { checkLanguageFilter, checkPriceFilter } from '../utils/courses';
+import { verifyPageObj } from '../utils/elements';
 
 When(
   'I filter by {string} in the {string} submenu',

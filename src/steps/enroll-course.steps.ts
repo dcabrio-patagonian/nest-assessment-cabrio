@@ -1,6 +1,6 @@
 import { Given, Then, When } from '@cucumber/cucumber';
-import { ICustomWorld } from '../../support/custom-world';
-import { verifyPageObj } from '../../utils/elements';
+import { ICustomWorld } from '../support/custom-world';
+import { verifyPageObj } from '../utils/elements';
 
 Then('I should enroll in the course if I am not enrolled in it', async function (this: ICustomWorld) {
   const page = await verifyPageObj(this.page);
