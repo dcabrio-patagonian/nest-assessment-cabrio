@@ -10,12 +10,18 @@ When('I search for courses with the category {string}', async function (this: IC
   if (categorySplit.length > 3) {
     throw new Error('Categories can only have 3 levels of depth');
   }
+
+  // Hover over the category element on the nav bar
   const selector = (cat: string) =>
     `div.list-menu--list-menu-container--21IlT.browse-nav--nav-container--2QiNy li a div:has-text('${cat}')`;
+
+  // For each category in the 'category path', hover over the category
   for (const cat of categorySplit) {
     await page.locator(selector(cat)).first().hover();
     await page.waitForTimeout(500);
   }
+
+  // Clicks the last category in the path, after hovering over all the necessary categories
   await page
     .locator(selector(categorySplit[categorySplit.length - 1]))
     .first()
@@ -29,6 +35,8 @@ Then('I should see {string} as the category search', async function (this: ICust
 
 When('I search for courses with query {string}', async function (this: ICustomWorld, query: string) {
   const page = await verifyPageObj(this.page);
+
+  // Saves the query in the world parameters for later use
   this.parameters.searchTerm = query;
   await page.locator("input[name='q']").fill(query);
   await page.locator("button[type='submit']").click();

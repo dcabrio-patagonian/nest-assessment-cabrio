@@ -4,6 +4,8 @@ import { verifyPageObj } from '../utils/elements';
 
 Then('I should enroll in the course if I am not enrolled in it', async function (this: ICustomWorld) {
   const page = await verifyPageObj(this.page);
+
+  // If the enroll button cant be found, then we are already enrolled
   try {
     const enrollBtn = page.locator(
       'div.buy-button.buy-box--buy-box-item--1Qbkl.buy-box--buy-button--1mpz_ > div > button:has-text("Enroll now")',
@@ -21,6 +23,8 @@ Then('I should enroll in the course if I am not enrolled in it', async function 
 Given('I save the course name', async function (this: ICustomWorld) {
   const page = await verifyPageObj(this.page);
   const courseName = await page.locator('h1.udlite-heading-xl.clp-lead__title.clp-lead__title--small').innerText();
+
+  // Save the course name in the world parameters for later use
   this.parameters.courseName = courseName;
 });
 
@@ -32,6 +36,8 @@ When(
       throw new Error('No API context found');
     }
     const { context } = api;
+
+    // Makes the request for the courses list with the given parameters and the saved query search
     const response = await context.get('courses/?' + parameters, {
       params: {
         search: this.parameters.searchTerm,
@@ -40,13 +46,14 @@ When(
     if ((await response.status()) > 299) {
       throw new Error(`Error calling courses-list endpoint: ${await response.text()}`);
     }
+
+    // Save the response in the world parameters for later use
     this.parameters.response = await response.json();
   },
 );
 
 Then('I should see the course name in the courses list', async function (this: ICustomWorld) {
-  const { response } = this.parameters;
-  const courseName = this.parameters.courseName;
+  const { response, courseName } = this.parameters;
   const course = response.results.find((c: { title: string }) => c.title === courseName);
   if (!course) {
     throw new Error(`Course ${courseName} not found`);
