@@ -3,7 +3,7 @@ import { ICustomWorld } from '../support/custom-world';
 import { verifyPageObj } from '../utils/elements';
 
 Then('I should enroll in the course if I am not enrolled in it', async function (this: ICustomWorld) {
-  const page = await verifyPageObj(this.page);
+  const page = verifyPageObj(this.page);
 
   // If the enroll button cant be found, then we are already enrolled
   try {
@@ -21,7 +21,7 @@ Then('I should enroll in the course if I am not enrolled in it', async function 
 });
 
 Given('I save the course name', async function (this: ICustomWorld) {
-  const page = await verifyPageObj(this.page);
+  const page = verifyPageObj(this.page);
   const courseName = await page.locator('h1.udlite-heading-xl.clp-lead__title.clp-lead__title--small').innerText();
 
   // Save the course name in the world parameters for later use
@@ -43,7 +43,7 @@ When(
         search: this.parameters.searchTerm,
       },
     });
-    if ((await response.status()) > 299) {
+    if (response.status() > 299) {
       throw new Error(`Error calling courses-list endpoint: ${await response.text()}`);
     }
 

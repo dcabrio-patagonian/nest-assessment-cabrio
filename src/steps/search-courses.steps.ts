@@ -34,7 +34,7 @@ Then('I should see {string} as the category search', async function (this: ICust
 });
 
 When('I search for courses with query {string}', async function (this: ICustomWorld, query: string) {
-  const page = await verifyPageObj(this.page);
+  const page = verifyPageObj(this.page);
 
   // Saves the query in the world parameters for later use
   this.parameters.searchTerm = query;
@@ -43,6 +43,6 @@ When('I search for courses with query {string}', async function (this: ICustomWo
 });
 
 Then('I should see {string} in the search results', async function (this: ICustomWorld, expected: string) {
-  const page = await verifyPageObj(this.page);
+  const page = verifyPageObj(this.page);
   await checkCourseSearch(page, 'h1.udlite-heading-xl.search--header-title--3wfny', expected);
 });

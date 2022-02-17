@@ -10,14 +10,14 @@ When(
     this.parameters.filters[submenu] = filter;
 
     const page = verifyPageObj(this.page);
-    const filterForm = await page.locator('#filter-form');
-    const filterSubmenus = await filterForm.locator('div > .panel--panel--3uDOH');
+    const filterForm = page.locator('#filter-form');
+    const filterSubmenus = filterForm.locator('div > .panel--panel--3uDOH');
 
     let filterSubmenu = null;
 
     // Find the submenu element that matches the submenu name
     for (let i = 0; i < (await filterSubmenus.count()); i++) {
-      filterSubmenu = await filterSubmenus.nth(i);
+      filterSubmenu = filterSubmenus.nth(i);
       const filterSubMenuText = await filterSubmenu.locator('div > h3 > button').innerText();
       if (filterSubMenuText === submenu) {
         break;
@@ -37,7 +37,7 @@ When(
 
 When('I click the course at position {string}', async function (this: ICustomWorld, position: string) {
   const page = verifyPageObj(this.page);
-  const courses = await page.locator('.course-list--container--3zXPS > .popper--popper--2r2To');
+  const courses = page.locator('.course-list--container--3zXPS > .popper--popper--2r2To');
   await courses.nth(parseInt(position) - 1).click();
 });
 

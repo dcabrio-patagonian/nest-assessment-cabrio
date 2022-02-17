@@ -8,6 +8,6 @@ import { Page } from 'playwright';
  * @param {string} password
  */
 export async function login(page: Page, username: string, password: string) {
-  await page.locator("input[name='email']").fill(username);
-  await page.locator("input[type='password']").fill(password);
+  await page.locator("input[name='email']").type(username, { delay: 50 });
+  await page.locator("input[type='password']").type(password, { delay: 50 });
 }
