@@ -1,5 +1,5 @@
 import { Before, After, BeforeAll, AfterAll, Status, setDefaultTimeout } from '@cucumber/cucumber';
-import { chromium, ChromiumBrowser, firefox, FirefoxBrowser, webkit, WebKitBrowser } from 'playwright';
+import { chromium, ChromiumBrowser, firefox, FirefoxBrowser, request, webkit, WebKitBrowser } from 'playwright';
 import { ITestCaseHookParameter } from '@cucumber/cucumber/lib/support_code_library_builder/types';
 import { ensureDir } from 'fs-extra';
 import { ICustomWorld } from './custom-world';
@@ -46,6 +46,17 @@ Before(async function (this: ICustomWorld, { pickle }: ITestCaseHookParameter) {
     recordVideo: process.env.PWVIDEO ? { dir: 'screenshots' } : undefined,
   });
   this.parameters.filters = [];
+
+  this.api = {
+    context: await request.newContext({
+      baseURL: process.env.BASE_URL + '/api-2.0/',
+      extraHTTPHeaders: {
+        Authorization: `Basic ${Buffer.from(process.env.API_CLIENT_ID + ':' + process.env.API_CLIENT_SECRET).toString(
+          'base64',
+        )}`,
+      },
+    }),
+  };
 
   await this.context.tracing.start({ screenshots: true, snapshots: true });
   this.page = await this.context.newPage();

@@ -1,6 +1,6 @@
 import { setWorldConstructor, World, IWorldOptions } from '@cucumber/cucumber';
 import * as messages from '@cucumber/messages';
-import { BrowserContext, Page } from 'playwright';
+import { APIRequestContext, BrowserContext, Page } from 'playwright';
 
 export interface CucumberWorldConstructorParams {
   parameters: { [key: string]: string };
@@ -12,6 +12,9 @@ export interface ICustomWorld extends World {
   context?: BrowserContext;
   page?: Page;
   testName?: string;
+  api?: {
+    context: APIRequestContext;
+  };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   parameters: { [key: string]: any };
 }
