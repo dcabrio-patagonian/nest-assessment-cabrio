@@ -21,5 +21,7 @@ Feature: Enroll in a course as user
 
     Scenario: Enroll in a course and check on API
         Given I save the course name
-        When I call the courses-list endpoint with the parameters "search=Java&page=1&price=price-free&language=en"
+        # Parameter list: https://www.udemy.com/developers/affiliate/methods/get-courses-list/
+        # Search parameter is already set by a previous step
+        When I call the courses-list endpoint with the previous query and the parameters "price=price-free&language=en&page=1"
         Then I should see the course name in the courses list
