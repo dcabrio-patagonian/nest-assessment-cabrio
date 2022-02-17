@@ -29,6 +29,7 @@ Then('I should see {string} as the category search', async function (this: ICust
 
 When('I search for courses with query {string}', async function (this: ICustomWorld, query: string) {
   const page = await verifyPageObj(this.page);
+  this.parameters.searchTerm = query;
   await page.locator("input[name='q']").fill(query);
   await page.locator("button[type='submit']").click();
 });

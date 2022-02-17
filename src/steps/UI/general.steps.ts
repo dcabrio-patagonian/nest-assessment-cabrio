@@ -23,7 +23,8 @@ Given('I click the submit button', async function () {
 
 Given('I am on the login page', async function (this: ICustomWorld) {
   const page = await verifyPageObj(this.page);
-  await page.locator("form[action-type='login']");
+  await page.waitForSelector("input[name='email']");
+  await page.waitForSelector("input[type='password']");
 });
 
 When('I fill in the email and password fields', async function (this: ICustomWorld) {
