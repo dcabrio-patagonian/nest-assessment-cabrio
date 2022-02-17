@@ -5,10 +5,10 @@ Feature: Login as user UI
 
     Background: Navigation
         Given I go to the main page
-        And I click on on the button with the selector "a[data-purpose='header-login']"
+        And I click the login button
 
     Scenario: Login as user UI
         Given I am on the login page
         And I fill in the email and password fields
-        And I click on on the button with the selector "input[type='submit']"
+        And I click the submit button
         Then I should be logged in
