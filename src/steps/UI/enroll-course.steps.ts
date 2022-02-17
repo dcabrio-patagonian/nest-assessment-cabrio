@@ -1,4 +1,4 @@
-import { Then } from '@cucumber/cucumber';
+import { Given, Then, When } from '@cucumber/cucumber';
 import { ICustomWorld } from '../../support/custom-world';
 import { verifyPageObj } from '../../utils/elements';
 
@@ -15,5 +15,40 @@ Then('I should enroll in the course if I am not enrolled in it', async function 
     await page.waitForSelector(
       'div.buy-button.buy-box--buy-box-item--1Qbkl.buy-box--buy-button--1mpz_ > div > button:has-text("Go to course")',
     );
+  }
+});
+
+Given('I save the course name', async function (this: ICustomWorld) {
+  const page = await verifyPageObj(this.page);
+  const courseName = await page.locator('h1.udlite-heading-xl.clp-lead__title.clp-lead__title--small').innerText();
+  this.parameters.courseName = courseName;
+});
+
+When(
+  'I call the courses-list endpoint with the previous query and the parameters {string}',
+  async function (this: ICustomWorld, parameters: string) {
+    const { api } = this;
+    if (!api || !api.context) {
+      throw new Error('No API context found');
+    }
+    const { context } = api;
+    const response = await context.get('courses/?' + parameters, {
+      params: {
+        search: this.parameters.searchTerm,
+      },
+    });
+    if ((await response.status()) > 299) {
+      throw new Error(`Error calling courses-list endpoint: ${await response.text()}`);
+    }
+    this.parameters.response = await response.json();
+  },
+);
+
+Then('I should see the course name in the courses list', async function (this: ICustomWorld) {
+  const { response } = this.parameters;
+  const courseName = this.parameters.courseName;
+  const course = response.results.find((c: { title: string }) => c.title === courseName);
+  if (!course) {
+    throw new Error(`Course ${courseName} not found`);
   }
 });

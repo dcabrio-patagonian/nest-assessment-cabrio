@@ -13,7 +13,7 @@ export interface ICustomWorld extends World {
   page?: Page;
   testName?: string;
   api?: {
-    context: APIRequestContext;
+    context?: APIRequestContext;
   };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   parameters: { [key: string]: any };
