@@ -1,6 +1,29 @@
 # QA NEST ASSESSMENT - PATAGONIAN 2022
 #### Damián Andrés Cabrio
 
+## Assignment
+- Start your own public repository
+- Download playwright repository with Cucumber-Gherkin integration
+- Make the script (typescript if possible) that solves:
+    - Visit site https://www.udemy.com/
+    - Login with credentials you have. (do not upload them to the repo)
+    - Perform a search for a category/course
+    - Use the filters to show only ENGLISH language and FREE price
+    - Select the second available course and enroll
+
+Get the Client for the API
+- Visit the site https://www.udemy.com/developers/affiliate/ and then https://www.udemy.com/user/edit-api-clients to generate the bearer token, when activated the Client_Id and Client_Secret will be visible.
+- Obtain the list of courses and verify that the one you enrolled via web is in the list.
+
+
+Take care of the organization and readability of the code in folders and object files.
+- Identify. 
+- Add comments.
+- Create a Readme to explain operation and commands to run the test.
+- Generate an output report with execution results.
+- Push the code to your repository
+
+
 ## Requirements:
 
 - node >=14
@@ -24,7 +47,7 @@ $ npm run report
 $ PWDEBUG=1 npx cucumber-ts
 ```
 
-## Change browser setting:
+### Change browser setting:
 
 Set the BROWSER environment variable, choose one of these options: chrome, webkit, firefox (The default browser is firefox)
 For example, to configure it to use webkit you would use this command:
@@ -45,7 +68,7 @@ Just as an example, here is how to run the test tagged as "@login" using firefox
 BROWSER=firefox npx cucumber-js --tags '@login'
 ```
 
-## Configuring headless mode:
+### Configuring headless mode:
 
 To enable/disable headless mode, look into the file src/support/config.ts and add/remove this attribute in the LaunchOptions:
 
