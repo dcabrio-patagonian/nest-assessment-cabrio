@@ -1,11 +1,12 @@
 import { Then, When } from '@cucumber/cucumber';
-import { ICustomWorld } from '../../support/custom-world';
-import { checkLanguageFilter, checkPriceFilter } from '../../utils/courses';
-import { verifyPageObj } from '../../utils/elements';
+import { ICustomWorld } from '../support/custom-world';
+import { checkLanguageFilter, checkPriceFilter } from '../utils/courses';
+import { verifyPageObj } from '../utils/elements';
 
 When(
   'I filter by {string} in the {string} submenu',
   async function (this: ICustomWorld, filter: string, submenu: string) {
+    // The applied filters are saved in the world parameters for later use
     this.parameters.filters[submenu] = filter;
 
     const page = verifyPageObj(this.page);
@@ -13,6 +14,8 @@ When(
     const filterSubmenus = await filterForm.locator('div > .panel--panel--3uDOH');
 
     let filterSubmenu = null;
+
+    // Find the submenu element that matches the submenu name
     for (let i = 0; i < (await filterSubmenus.count()); i++) {
       filterSubmenu = await filterSubmenus.nth(i);
       const filterSubMenuText = await filterSubmenu.locator('div > h3 > button').innerText();
@@ -40,6 +43,8 @@ When('I click the course at position {string}', async function (this: ICustomWor
 
 Then('I should see the filters filters applied', async function (this: ICustomWorld) {
   const page = verifyPageObj(this.page);
+
+  // To add another filter check, add another case to the switch statement
   for (const filter in this.parameters.filters) {
     const expectedValue = this.parameters.filters[filter];
     switch (filter) {

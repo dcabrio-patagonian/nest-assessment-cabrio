@@ -1,8 +1,8 @@
 import { Given, Then, When } from '@cucumber/cucumber';
 import dotenv from 'dotenv';
-import { ICustomWorld } from '../../support/custom-world';
-import { verifyPageObj, goToUrl } from '../../utils/elements';
-import { login } from '../../utils/profile';
+import { ICustomWorld } from '../support/custom-world';
+import { verifyPageObj, goToUrl } from '../utils/elements';
+import { login } from '../utils/profile';
 
 dotenv.config();
 
