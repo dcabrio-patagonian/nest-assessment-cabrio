@@ -5,7 +5,7 @@ Feature: Enroll in a course as user
 
     Background: Navigation
         Given I go to the main page
-        And I click the login button
+        When I click the login button
         And I am on the login page
         And I fill in the email and password fields
         And I click the submit button
@@ -20,7 +20,7 @@ Feature: Enroll in a course as user
         Then I should enroll in the course if I am not enrolled in it
 
     Scenario: Enroll in a course and check on API
-        Given I save the course name
+        When I save the course name
         # Parameter list: https://www.udemy.com/developers/affiliate/methods/get-courses-list/
         # Search parameter is already set by a previous step
         When I call the courses-list endpoint with the previous query and the parameters "price=price-free&language=en&page=1"

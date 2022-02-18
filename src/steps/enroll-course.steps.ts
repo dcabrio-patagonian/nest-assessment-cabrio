@@ -1,4 +1,4 @@
-import { Given, Then, When } from '@cucumber/cucumber';
+import { Then, When } from '@cucumber/cucumber';
 import { ICustomWorld } from '../support/custom-world';
 import { verifyPageObj } from '../utils/elements';
 
@@ -20,7 +20,7 @@ Then('I should enroll in the course if I am not enrolled in it', async function 
   }
 });
 
-Given('I save the course name', async function (this: ICustomWorld) {
+When('I save the course name', async function (this: ICustomWorld) {
   const page = verifyPageObj(this.page);
   const courseName = await page.locator('h1.udlite-heading-xl.clp-lead__title.clp-lead__title--small').innerText();
 

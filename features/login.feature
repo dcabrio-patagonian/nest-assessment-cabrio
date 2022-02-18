@@ -5,10 +5,10 @@ Feature: Login as user UI
 
     Background: Navigation
         Given I go to the main page
-        And I click the login button
+        When I click the login button
 
     Scenario: Login as user UI
-        Given I am on the login page
+        When I am on the login page
         And I fill in the email and password fields
         And I click the submit button
         Then I should be logged in
