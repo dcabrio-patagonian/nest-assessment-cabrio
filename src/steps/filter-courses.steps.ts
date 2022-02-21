@@ -11,18 +11,10 @@ When(
 
     const page = verifyPageObj(this.page);
     const filterForm = page.locator('#filter-form');
-    const filterSubmenus = filterForm.locator('div > .panel--panel--3uDOH');
 
-    let filterSubmenu = null;
-
-    // Find the submenu element that matches the submenu name
-    for (let i = 0; i < (await filterSubmenus.count()); i++) {
-      filterSubmenu = filterSubmenus.nth(i);
-      const filterSubMenuText = await filterSubmenu.locator('div > h3 > button').innerText();
-      if (filterSubMenuText === submenu) {
-        break;
-      }
-    }
+    const filterSubmenu = filterForm.locator('div > .panel--panel--3uDOH', {
+      has: page.locator(`div > h3 > button:has-text('${submenu}')`),
+    });
 
     if (filterSubmenu === null) {
       throw new Error(`Could not find submenu ${submenu}`);
